@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veo 3 Multi-Shot Prompt Builder (Advanced)</title>
+<style>
+body{font-family:'Segoe UI',sans-serif;background:radial-gradient(circle at top,#101010,#0a0a0a 80%);
+color:#fff;display:flex;flex-direction:column;align-items:center;padding:40px;}
+h1{color:#00BFA5;margin-bottom:4px;}h2{color:#bbb;font-weight:normal;margin-top:0;}
+textarea,select{width:90%;max-width:780px;border-radius:8px;border:none;padding:12px;margin:8px 0;
+font-size:1rem;background:#222;color:#fff;}textarea{height:100px;resize:vertical;}
+button{background:#00BFA5;border:none;border-radius:8px;padding:12px 24px;color:#fff;font-size:1rem;cursor:pointer;margin-top:10px;}
+button:hover{background:#00d9bb;}#output{background:#1b1b1b;padding:20px;border-radius:10px;width:90%;max-width:780px;white-space:pre-wrap;
+margin-top:20px;font-family:monospace;font-size:0.95rem;}.sectionTitle{margin-top:20px;color:#00BFA5;}
+</style></head>
+<body>
+<h1>🎬 Veo 3 Multi-Shot Prompt Builder (Advanced)</h1>
+<h2>Design 3 cinematic shots with full camera control</h2>
+<textarea id="idea" placeholder="Enter your concept (e.g. a samurai walking through a bamboo forest)"></textarea>
+<select id="genre"><option value="cinematic realism">🎥 Cinematic Realism</option><option value="nature and landscape">🌿 Nature & Landscape</option>
+<option value="urban lifestyle">🏙️ Urban Lifestyle</option><option value="futuristic sci-fi">🚀 Futuristic / Sci-Fi</option>
+<option value="dream sequence">✨ Dream / Surreal</option><option value="commercial product">📺 Commercial / Product Scene</option></select>
+<select id="mood"><option value="peaceful and reflective">Peaceful</option><option value="mysterious and moody">Mysterious</option>
+<option value="dramatic and emotional">Dramatic</option><option value="energetic and bold">Energetic</option>
+<option value="uplifting and inspiring">Inspiring</option></select>
+<select id="lighting"><option value="golden hour with soft warm tones">Golden Hour</option><option value="cool blue evening light">Evening</option>
+<option value="harsh daylight with sharp shadows">Daylight</option><option value="soft ambient night light with neon accents">Night / Neon</option>
+<option value="misty diffuse overcast light">Overcast</option></select>
+<div class="sectionTitle">🎥 Shot 1 – Establishing</div>
+<select id="shot1"><option value="wide aerial drone shot establishing the full environment">Wide Aerial Establishing</option>
+<option value="static wide shot revealing the landscape from afar">Static Wide</option><option value="slow pan across the environment for context">Slow Pan</option>
+<option value="dolly-out from the subject revealing the setting">Dolly-Out Reveal</option></select>
+<div class="sectionTitle">🎥 Shot 2 – Action / Emotion</div>
+<select id="shot2"><option value="medium tracking shot following the subject">Medium Tracking</option>
+<option value="handheld mid-shot capturing emotion">Handheld Mid-Shot</option><option value="orbiting steady-cam shot circling the subject">Orbit Around Subject</option>
+<option value="medium dolly-in emphasizing subtle emotion">Medium Dolly-In</option></select>
+<div class="sectionTitle">🎥 Shot 3 – Close / Reveal</div>
+<select id="shot3"><option value="close-up with shallow depth of field focused on a key detail">Close-Up Detail</option>
+<option value="POV shot from the subject’s perspective">POV Perspective</option><option value="slow zoom to a symbolic object or expression">Slow Zoom Reveal</option>
+<option value="extreme close-up showing texture or emotion">Extreme Close-Up</option></select>
+<button onclick="generatePrompt()">Generate Prompt</button><button onclick="copyPrompt()">Copy Prompt</button>
+<div id="output"></div>
+<script>
+function generatePrompt(){
+const idea=document.getElementById("idea").value.trim()||"a cinematic scene";
+const genre=document.getElementById("genre").value;const mood=document.getElementById("mood").value;
+const lighting=document.getElementById("lighting").value;const shot1=document.getElementById("shot1").value;
+const shot2=document.getElementById("shot2").value;const shot3=document.getElementById("shot3").value;
+const prompt=`🎞️ **Veo 3 Multi-Shot Prompt (Advanced)**
+
+[CONCEPT]
+${idea.charAt(0).toUpperCase()+idea.slice(1)} — styled as ${genre}, illuminated by ${lighting}. The tone is ${mood}.
+
+────────────────────────────
+🎬 **SHOT 1 – Establishing**
+Camera: ${shot1}. Show the full environment, setting tone and context.
+Lighting reflects ${lighting}. Ambient audio introduces the space (wind, ambience, or faint score).
+
+────────────────────────────
+🎬 **SHOT 2 – Action / Emotion**
+Camera: ${shot2}. Focus on movement or interaction; capture emotion or intent.
+Add subtle motion (dust, leaves, reflections) to enhance realism. Maintain a ${mood} tone.
+
+────────────────────────────
+🎬 **SHOT 3 – Close / Reveal**
+Camera: ${shot3}. Highlight an emotional beat or visual payoff.
+Use shallow depth of field and cinematic fade-out to conclude the sequence.
+
+────────────────────────────
+🎧 **Audio & Style**
+Consistent ambience across shots; realistic sound design (city hum, forest breeze, or quiet piano).
+Render in 1080p @ 24 fps with filmic color grading, soft motion blur, and HDR lighting.
+
+⚙️ **Total Duration**
+Approx 6–8 seconds combined. Ideal for Veo 3 preview length.`;
+document.getElementById("output").textContent=prompt.trim();}
+function copyPrompt(){const t=document.getElementById("output").textContent;if(!t)return alert("Generate a prompt first!");
+navigator.clipboard.writeText(t);alert("Prompt copied to clipboard!");}
+</script></body></html>
